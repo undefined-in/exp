@@ -13,9 +13,16 @@ export default function ExpForm() {
     category: "",
   });
   const addCategory = () => {
-    axios
+    if(category=="")
+    {
+      alert("Category is blank")
+    }
+    else{
+      axios
       .post("https://retoolapi.dev/jUsVnU/category", category)
       alert('category added')
+    
+    }
       
   };
 
@@ -35,7 +42,7 @@ export default function ExpForm() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={addCategory}>
+        <Button size="medium" onClick={addCategory}>
           ADD CATEGORY
         </Button>
       </CardActions>

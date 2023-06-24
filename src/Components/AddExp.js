@@ -76,10 +76,11 @@ export default function AddExp() {
         </Box>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={handlesubmit}>Add Expense</Button>
+        <Button size="medium" onClick={handlesubmit}>Add Expense</Button>
       </CardActions>
     </Card>
     <br/>
+    <br/><br/><br/><br/><br/>
     <ExpForm/>
     </>
   );
