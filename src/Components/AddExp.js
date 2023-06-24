@@ -25,10 +25,17 @@ export default function AddExp() {
       category:selectedCategory,
       amount:amount
     }
-
-    axios.post('https://retoolapi.dev/qeN8pu/data',obj)
+    if(amount==='' || cat ==[])
+    {
+      alert("Enter a valid amount / category");
+    }
+    else
+    {
+      axios.post('https://retoolapi.dev/qeN8pu/data',obj)
     
-    alert("Expense submitted")
+      alert("Expense submitted")
+    }
+
   }
   const handleChange = (event) => {
     setSelectedCategory(event.target.value);
@@ -76,7 +83,7 @@ export default function AddExp() {
         </Box>
       </CardContent>
       <CardActions>
-        <Button size="medium" onClick={handlesubmit}>Add Expense</Button>
+        <Button variant="contained" size="large" onClick={handlesubmit}>Add Expense</Button>
       </CardActions>
     </Card>
     <br/>

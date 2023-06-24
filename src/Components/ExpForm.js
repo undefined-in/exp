@@ -13,7 +13,7 @@ export default function ExpForm() {
     category: "",
   });
   const addCategory = () => {
-    if(category=="")
+    if(category.category=="")
     {
       alert("Category is blank")
     }
@@ -42,7 +42,7 @@ export default function ExpForm() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="medium" onClick={addCategory}>
+        <Button variant="contained" size="large" onClick={addCategory}>
           ADD CATEGORY
         </Button>
       </CardActions>
