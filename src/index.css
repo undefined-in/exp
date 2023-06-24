@@ -1,0 +1,14 @@
+.category_mssg
+{
+    color: darkgreen;
+    font-size: large;
+    padding-left: 20px;
+    font-weight: bold;
+}
+.danger
+{
+    color: red;
+    font-size: large;
+    padding-left: 20px;
+    font-weight: bold;
+}

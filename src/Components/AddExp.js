@@ -16,37 +16,44 @@ import ExpForm from "./ExpForm";
 export default function AddExp() {
   const [selectedCategory, setSelectedCategory] = React.useState("");
   const [cat, setCat] = useState([]);
-  const [amount,setAmount] = useState('');
-  const date = Date()
-  const handlesubmit = ()=>
-  {
-    const obj = {
-      date:date,
-      category:selectedCategory,
-      amount:amount
-    }
-    if(amount==='' || cat ==[])
-    {
-      alert("Enter a valid amount / category");
-    }
-    else
-    {
-      axios.post('https://retoolapi.dev/qeN8pu/data',obj)
+  const [amount, setAmount] = useState("");
+  const [flag, setflag] = useState(false);
+  const [status,setStatus] = useState('')
+  const date = Date();
+  const [temp, settemp] = useState([]);
+  const obj = {
+    date: date,
+    category: selectedCategory,
+    amount: amount,
+  };
+  const flagtrigger = () => {
+    setflag(true);
+    setTimeout(() => {
+      setStatus('')
+      setflag(false);
+    }, 2000);
+  };
+  const handlesubmit = () => {
     
-      alert("Expense submitted")
+    if (amount === "" || selectedCategory === "") {
+      setStatus("error")
+    } else {
+      axios.post("https://retoolapi.dev/qeN8pu/data", obj);
+      settemp(obj)
+      flagtrigger();
+      setAmount("");
+      setSelectedCategory("");
+      
     }
-
-  }
+  };
   const handleChange = (event) => {
     setSelectedCategory(event.target.value);
   };
   useEffect(() => {
-    
     const fetchData = async () => {
       try {
         const res = await axios.get("https://retoolapi.dev/jUsVnU/category");
         setCat(res.data);
-        
       } catch (err) {}
     };
     fetchData();
@@ -54,41 +61,59 @@ export default function AddExp() {
 
   return (
     <>
-    <Card sx={{ minWidth: 275 }}>
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          <TextField
-            id="standard-basic"
-            label="Enter Amount"
-            variant="standard"
-            onChange={(e)=>setAmount(e.target.value)}
-          />
-        </Typography>
-<br/>
-        <Box sx={{ minWidth: 120 }}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Category</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={selectedCategory}
-              label="Category"
-              onChange={handleChange}
-            >
-              {cat.map((obj) => (
-                <MenuItem value={obj.category}>{obj.category}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Box>
-      </CardContent>
-      <CardActions>
-        <Button variant="contained" size="large" onClick={handlesubmit}>Add Expense</Button>
-      </CardActions>
-    </Card>
-    <br/>
-    <br/><br/><br/><br/><br/>
-    <ExpForm/>
+      <Card sx={{ minWidth: 275 }}>
+      {flag && (
+            <div className="category_mssg">
+              Expense added: {temp.category} - {temp.amount}
+            </div>
+          )}
+          {!flag && status=="error" && (
+            <div className="danger">Amount/Category is blank</div>
+          )}
+        <CardContent>
+          
+          
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            <TextField
+              id="outlined-helperText"
+              label="Enter Amount"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
+          </Typography>
+          <br />
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Category</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={selectedCategory}
+                label="Category"
+                onChange={handleChange}
+                MenuProps={{
+                  sx: {
+                    maxHeight: 250,
+                  },
+                }}
+              >
+                {cat.map((obj) => (
+                  <MenuItem value={obj.category}>{obj.category}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+        </CardContent>
+        <CardActions>
+          <Button variant="contained" size="large" onClick={handlesubmit}>
+            Add Expense
+          </Button>
+        </CardActions>
+      </Card>
+      <br />
+      <br />
+      <br />
+      <ExpForm />
     </>
   );
 }

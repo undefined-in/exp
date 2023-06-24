@@ -6,6 +6,7 @@ import AddExp from './Components/AddExp';
 function App() {
   return (
     <div className="App">
+      <br/>
     <AddExp/>
     </div>
   );
