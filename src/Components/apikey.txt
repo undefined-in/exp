@@ -1,0 +1,37 @@
+GET
+/jUsVnU/category
+GET filter
+/jUsVnU/category?category=value
+GET by id
+/jUsVnU/category/1
+GET paginate
+/jUsVnU/category?_page=2&_limit=10
+POST
+/jUsVnU/category
+PUT
+/jUsVnU/category/1
+PATCH
+/jUsVnU/category/1
+DELETE
+/jUsVnU/category/1
+
+exp - curl "https://api-generator.retool.com/jUsVnU/category"
+
+data - 
+
+GET
+/qeN8pu/data
+GET filter
+/qeN8pu/data?Date=value
+GET by id
+/qeN8pu/data/1
+GET paginate
+/qeN8pu/data?_page=2&_limit=10
+POST
+/qeN8pu/data
+PUT
+/qeN8pu/data/1
+PATCH
+/qeN8pu/data/1
+DELETE
+/qeN8pu/data/1
