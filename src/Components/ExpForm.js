@@ -15,6 +15,7 @@ export default function ExpForm() {
   const addCategory = () => {
     axios
       .post("https://retoolapi.dev/jUsVnU/category", category)
+      alert('category added')
       
   };
 
